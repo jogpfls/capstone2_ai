@@ -1,0 +1,33 @@
+dataset:
+  images_dir: "/Users/chohyerin/Desktop/images/default"
+  annotations: "/Users/chohyerin/Desktop/annotations/instances_default.json"
+  train_split: 0.85
+  random_seed: 42
+
+classes:
+  # 배경은 0으로 고정, COCO category_id는 아래 mapping에서 변환
+  names: ["background", "multicopter_body", "propeller", "fixed_wing_body"]
+  category_id_to_train_id: {"1": 1, "2": 2, "3": 3}
+
+training:
+  num_classes: 4
+  image_size: 640
+  batch_size: 2
+  num_workers: 4
+  epochs: 5
+  lr: 0.0003
+  weight_decay: 0.0001
+  amp: true
+  checkpoint_dir: "/Users/chohyerin/Desktop/capstone/capstone2/segmentation/checkpoints"
+  output_dir: "/Users/chohyerin/Desktop/capstone/capstone2/segmentation/outputs"
+  run_infer_after_train: true
+
+model:
+  backbone: "resnet50"
+  pretrained: false
+  aux_loss: true
+
+eval:
+  save_overlay: true
+  save_pred_mask: true
+  max_samples: 50
